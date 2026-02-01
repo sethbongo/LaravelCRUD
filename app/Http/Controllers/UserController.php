@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use function PHPUnit\Framework\returnArgument;
+
+
+
+class UserController extends Controller
+{
+
+
+    public function landingPageView(){
+        return view('landingpage');
+    }
+    public function signupView(){
+        return view('signup');
+    }
+
+    
+    public function register(Request $request){
+
+        $incoming = $request->validate([
+            'first_name' => ['required', 'min:3', 'max:70'],
+            'middle_name' => ['required', 'min:3', 'max:50'],
+            'last_name' => ['required', 'min:3', 'max:50'],
+            'email' => ['required', Rule::unique('users', 'email')],
+            'password' => 'required'
+
+        ]);
+        $incoming['password'] = bcrypt($incoming['password']);
+        User::create($incoming);
+        return redirect()->route('landingpageview');
+    }
+
+        public function logout(Request $request){
+                Session::forget('user_id');
+                $request->session()->invalidate();
+                return redirect()->route('landingpageview');
+                }
+
+        public function login(Request $request){
+            $user = User::where('email', $request->loginEmail)->first();
+            if ($user && Hash::check($request->loginPassword, $user->password)) {
+            Session::put('user_id', $user->id);
+            return redirect()->route('welcome');
+            }
+            return back()->with('error', 'Invalid credentials');
+            }
+
+}

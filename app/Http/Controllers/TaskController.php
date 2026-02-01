@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Post;
+use App\Models\Task;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Routing\Controllers\HasMiddleware;
+
+
+class TaskController extends Controller implements HasMiddleware
+{
+
+    public static function middleware(): array
+{
+    return [
+        'checkuser',
+    ];
+}
+
+
+    public function savetask(Request $request){
+        $incoming = $request->validate([
+        'title' => 'required',
+        'tasks'=> 'required',
+        'date_to_do' => ['required', 'date', 'after_or_equal:today']
+        ]
+        );
+
+        $incoming['user_id'] = Session::get('user_id');
+
+        Task::create($incoming);
+        return redirect()->route('welcome');
+    }
+
+
+    public function getTasks(){
+        $tasks = Task::where('user_id', Session::get('user_id'))->get();
+        return view('todopage', ['tasks'=>$tasks]);
+
+    }
+    
+    public function taskdelete(Task $task){
+        if (Session::get('user_id') == $task['user_id']){
+            $task->delete();
+        }
+        return redirect()->route('welcome');
+    }
+
+    public function editTask(Task $task){
+        if (Session::get('user_id') != $task['user_id']){
+            return redirect()->route('welcome');
+        }
+        
+        $tasks = Task::where('user_id', Session::get('user_id'))->get();
+        return view('todopage', ['tasks'=>$tasks, 'editTask'=>$task]);
+    }
+
+    public function updateTask(Request $request, Task $task){
+
+        $incoming = $request->validate([
+            'title' => 'required',
+            'tasks'=> 'required',
+            'date_to_do' => ['required', 'date', 'after_or_equal:today']
+        ]);
+
+        $task->update($incoming);
+        return redirect()->route('welcome');
+    }
+
+}
