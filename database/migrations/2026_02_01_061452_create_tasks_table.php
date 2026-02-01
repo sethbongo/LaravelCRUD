@@ -21,13 +21,7 @@ return new class extends Migration
         });
     }
 
-        protected $fillable = [
-        'title',
-        'tasks',
-        'date_to_do',
-        'user_id',
-        
-    ];
+
 
     /**
      * Reverse the migrations.

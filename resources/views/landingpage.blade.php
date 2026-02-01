@@ -7,12 +7,15 @@
             <form action="{{ route('login_account') }}" method="post">
             @csrf
             <div>
-                <p>Email: <input type="text" placeholder="Enter email" name="loginEmail" value="{{ old('loginEmail') }}" required></p>
+                <label for="loginEmail">Email:</label>
+                <input type="text" id="loginEmail" placeholder="Enter email" name="loginEmail" value="{{ old('loginEmail') }}" required> 
             </div>
-            <div> 
-                <p>Password: <input type="password" placeholder="Enter password" name="loginPassword" required></p>
+            <br>
+            <div>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" placeholder="Enter password" name="loginPassword" required>
             </div>
-
+                <br>
             @error('login')
             <p style="color:red">{{ $message }}</p>
             @enderror

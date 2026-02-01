@@ -7,39 +7,39 @@
     <form action="{{ route('register_account') }}" method="post">
         @csrf
         <div id="'first_nameDiv">
-        <p> First name: <input type="text" placeholder="Enter first name" name='first_name' value="{{ old('first_name') }}" required> </p> 
+        <label for="first_name"> First name: <input type="text" id="first_name" placeholder="Enter first name" name='first_name' value="{{ old('first_name') }}" required> </label> 
        @error('first_name')
         <p style="color:red">{{ $message }}</p>
         @enderror    
-    </div>
+    </div> <br>
 
         <div id="m_nameDiv">
-        <p>Middle name: <input type="text" placeholder="Enter middle name" name='middle_name' value="{{ old('middle_name') }}" required></p>
+        <label for="middle_name">Middle name: <input type="text" id="middle_name" placeholder="Enter middle name" name='middle_name' value="{{ old('middle_name') }}" required></label>
        @error('middle_name')
         <p style="color:red">{{ $message }}</p>
         @enderror   
-    </div>
+    </div><br>
 
         <div id="l_nameDiv">
-        <p>Last name: <input type="text" placeholder="Enter last name" name='last_name' value="{{ old('last_name') }}" required></p>
+        <label for="last_name">Last name: <input type="text" id="last_name" placeholder="Enter last name" name='last_name' value="{{ old('last_name') }}" required></label>
        @error('last_name')
         <p style="color:red">{{ $message }}</p>
         @enderror    
-    </div>
+    </div><br>
 
         <div id="emailDiv">
-        <p>Email: <input type="email" placeholder="Enter email" name='email' value="{{ old('email') }}" required></p>
+        <label for="email">Email: <input type="email" id="email" placeholder="Enter email" name='email' value="{{ old('email') }}" required></label>
         @error('email')
         <p style="color:red">{{ $message }}</p>
         @enderror
-        </div>
+        </div><br>
 
         <div id="passDiv">
-        <p>Password:<input type="password" placeholder="Enter password" name='password'required></p>
+        <label for="password">Password:<input type="password" id="password" placeholder="Enter password" name='password'required></label>
        @error('password')
         <p style="color:red">{{ $message }}</p>
         @enderror    
-    </div>
+    </div><br>
         
         <div id="btnDiv">
         <button>Submit</button>

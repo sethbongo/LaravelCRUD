@@ -64,8 +64,8 @@ class TaskController extends Controller implements HasMiddleware
     public function updateTask(Request $request, Task $task){
 
         $incoming = $request->validate([
-            'title' => 'required',
-            'tasks'=> 'required',
+            'title' => ['required', 'max:255'],
+            'tasks'=> ['required'],
             'date_to_do' => ['required', 'date', 'after_or_equal:today']
         ]);
 

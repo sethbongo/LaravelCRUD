@@ -5,12 +5,12 @@
     @push('styles')
     <style>
 
-        .todo-container {
+        .outer_div_tasks {
             max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1.5rem;
         }
-        .todo-header h1 {
+        .inner_div h1 {
             font-size: 2.5rem;
             color: #000000;
             margin-bottom: 0.5rem;
@@ -29,15 +29,15 @@
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
         }
-        .form-group label {
+        .div_tasks label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: #000000;
         }
 
-        .form-group input,
-        .form-group textarea {
+        .div_tasks input,
+        .div_tasks textarea {
             width: 100%;
             padding: 0.75rem;
             border: 2px solid #000000;
@@ -83,14 +83,14 @@
 
         }
 
-        .tasks-list {
+        .tasks_display {
             background-color: white;
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .tasks-list h2 {
+        .tasks_display h2 {
             color: #000000;
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
@@ -126,7 +126,7 @@
             gap: 0.5rem;
         }
 
-        .update-btn, .delete-btn {
+        .updatebutton, .deletebutton {
             padding: 0.5rem 1.5rem;
             font-size: 0.9rem;
             font-weight: 600;
@@ -135,21 +135,21 @@
             border: 1.5px solid #000000;
         }
 
-        .update-btn {
+        .updatebutton {
             background-color: white;
             color: #000000;
         }
 
-        .update-btn:hover {
+        .updatebutton:hover {
             background-color: #bebaba;
         }
 
-        .delete-btn {
+        .deletebutton {
             background-color: white;
             color: #000000;
         }
 
-        .delete-btn:hover {
+        .deletebutton:hover {
             background-color: #bebaba;
         }
        
@@ -159,8 +159,8 @@
 
 @section('content')
 
-   <div class="todo-container">
-        <div class="todo-header">
+   <div class="outer_div_tasks">
+        <div class="inner_div">
             <h1>My To-Do List</h1>
         </div>
 
@@ -168,10 +168,12 @@
             <h2>{{ isset($editTask) ? 'Update Task' : 'Add New Task' }}</h2>
             <form action="{{ isset($editTask) ? route('updateTask', $editTask->id) : route('saveTasks') }}" method="POST">
                 @csrf
+
                 @if(isset($editTask))
                     @method('PUT')
                 @endif
-                <div class="form-group">
+
+                <div class="div_tasks">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" required placeholder="Enter title" value="{{ old('title', $editTask->title ?? '') }}">
                     @error('title')
@@ -179,7 +181,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
+                <div class="div_tasks">
                     <label for="tasks">Tasks </label>
                     <textarea id="tasks" name="tasks" required placeholder="Enter tasks to do">{{ old('tasks', $editTask->tasks ?? '') }}</textarea>
                     @error('tasks')
@@ -187,7 +189,7 @@
                     @enderror                
                 </div>
 
-                <div class="form-group">
+                <div class="div_tasks">
                     <label for="date_to_do">Due Date</label>
                     <input type="date" id="date_to_do" name="date_to_do" required value="{{ old('date_to_do', isset($editTask) ? $editTask->date_to_do : '') }}">
                     @error('date_to_do')
@@ -196,28 +198,29 @@
                 </div>
 
                 <button type="submit" class="add-btn">{{ isset($editTask) ? 'Update Task' : 'Add Task' }}</button>
+                
                 @if(isset($editTask))
                     <a href="{{ route('welcome') }}" class="cancel-btn">Cancel</a>
                 @endif
             </form>
         </div>
 
-        <div class="tasks-list">
+        <div class="tasks_display">
             <h2>Your Tasks</h2>
             @forelse($tasks ?? [] as $task)
                 <div class="task-item">
                     <h3>{{ $task->title }}</h3>
                     <p>{{ $task->tasks }}</p>
-                    <p class="task-date">Due: {{ \Carbon\Carbon::parse($task->date_to_do)->format('M d, Y') }}</p>
+                    <p class="task-date">Due: {{ $task->date_to_do }}</p>
                     <div class="task-actions">
                         <form action="{{ route('editTask', $task->id) }}" method="GET" style="display: inline;">
-                            <button type="submit" class="update-btn">Update</button>
+                            <button type="submit" class="updatebutton">Update</button>
                         </form>
 
                         <form action="{{ route('deletepost',$task->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                            <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
                         </form>
                     </div>
                 </div>
