@@ -2,9 +2,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <x-layout></x-layout>
+    <x-layout/>
 
-    <title>{{ $title }}</title>
+    <title>@yield('title', '')</title>
+
 <style>
 body {
     display: flex;
@@ -52,7 +53,7 @@ body {
 <body>
 
     <div name="forms" id="forms">
-    {{ $slot }}
+        @yield('content')
     </div>
 </body>
 </html>

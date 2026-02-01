@@ -26,11 +26,11 @@ class UserController extends Controller
     public function register(Request $request){
 
         $incoming = $request->validate([
-            'first_name' => ['required', 'min:3', 'max:70'],
-            'middle_name' => ['required', 'min:3', 'max:50'],
-            'last_name' => ['required', 'min:3', 'max:50'],
+            'first_name' => ['required', 'min:1', 'max:70', 'regex:/^[a-zA-Z\s-]+$/'],
+            'middle_name' => ['required', 'min:1', 'max:50', 'regex:/^[a-zA-Z\s-]+$/'],
+            'last_name' => ['required', 'min:1', 'max:50', 'regex:/^[a-zA-Z\s-]+$/'],
             'email' => ['required', Rule::unique('users', 'email')],
-            'password' => 'required'
+            'password' => ['required', 'min:6']
 
         ]);
         $incoming['password'] = bcrypt($incoming['password']);
@@ -50,7 +50,7 @@ class UserController extends Controller
             Session::put('user_id', $user->id);
             return redirect()->route('welcome');
             }
-            return back()->with('error', 'Invalid credentials');
+            return back()->withErrors(['login' => 'Invalid credentials'])->withInput();
             }
 
 }

@@ -1,24 +1,29 @@
-<x-login-layout>
+@extends('layouts.login-layout')
 
-    <x-slot name="title">
-        Login
-    </x-slot>
+    @section('title', 'Login')
+
+    @section('content')
 
             <form action="{{ route('login_account') }}" method="post">
             @csrf
             <div>
-                <p>Email: <input type="text" placeholder="Enter email" name="loginEmail"></p>
+                <p>Email: <input type="text" placeholder="Enter email" name="loginEmail" value="{{ old('loginEmail') }}" required></p>
             </div>
             <div> 
-                <p>Password: <input type="password" placeholder="Enter password" name="loginPassword"></p>
+                <p>Password: <input type="password" placeholder="Enter password" name="loginPassword" required></p>
             </div>
-            
+
+            @error('login')
+            <p style="color:red">{{ $message }}</p>
+            @enderror
+
             <div id="btnDiv">
                 <button>Login</button>
             </div>
+
             <div id="noAccount">
                 Don't have an account? <a href="{{ route('signup') }}">Sign up</a>
             </div>
 
         </form>
-</x-login-layout>
+    @endsection

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewPagesController;
@@ -17,7 +19,7 @@ Route::post('/login', [UserController::class, 'login'])->name('login_account');
 Route::post('/logout', [UserController::class, 'logout'])->name( 'logout_user');
 
 
-Route::get('/welcome', [TaskController::class, 'getTasks'])->name('welcome');
+Route::get('/tasks', [TaskController::class, 'getTasks'])->name('welcome');
 
 Route::post('/tasks', [TaskController::class, 'savetask'])->name('saveTasks');
 
@@ -26,3 +28,9 @@ Route::get('/edittask/{task}', [TaskController::class, 'editTask'])->name('editT
 Route::put('/updatetask/{task}', [TaskController::class, 'updateTask'])->name('updateTask');
 
 Route::delete('/deletetasks/{task}', [TaskController::class, 'taskdelete'])->name('deletepost');
+
+Route::get('/profile', [ProfileController::class, 'profileview'])->name('profile');
+
+Route::put('/editprofile', [ProfileController::class,  'editprofile'])->name('editprofile');
+
+Route::delete('/deleteprofile', [ProfileController::class, 'deleteprofile'])->name('deleteprofile');

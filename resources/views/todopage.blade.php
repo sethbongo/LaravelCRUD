@@ -1,8 +1,7 @@
-<x-main-layout>
+@extends('layouts.main-layout')
 
-  <x-slot name="title">
-        ToDo List
-    </x-slot>
+@section('title', 'ToDo Lists')
+
     @push('styles')
     <style>
 
@@ -80,9 +79,8 @@
         }
 
         .cancel-btn:hover {
-            background-color: #ff6b6b;
-            border-color: #ff6b6b;
-            color: white;
+            background-color: #bebaba;
+
         }
 
         .tasks-list {
@@ -159,8 +157,9 @@
     @endpush
 
 
-    <x-slot name="content">
-    <div class="todo-container">
+@section('content')
+
+   <div class="todo-container">
         <div class="todo-header">
             <h1>My To-Do List</h1>
         </div>
@@ -175,16 +174,25 @@
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" required placeholder="Enter title" value="{{ old('title', $editTask->title ?? '') }}">
+                    @error('title')
+                    <p style="color:red">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="tasks">Tasks </label>
                     <textarea id="tasks" name="tasks" required placeholder="Enter tasks to do">{{ old('tasks', $editTask->tasks ?? '') }}</textarea>
+                    @error('tasks')
+                    <p style="color:red">{{ $message }}</p>
+                    @enderror                
                 </div>
 
                 <div class="form-group">
                     <label for="date_to_do">Due Date</label>
                     <input type="date" id="date_to_do" name="date_to_do" required value="{{ old('date_to_do', isset($editTask) ? $editTask->date_to_do : '') }}">
+                    @error('date_to_do')
+                    <p style="color:red">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <button type="submit" class="add-btn">{{ isset($editTask) ? 'Update Task' : 'Add Task' }}</button>
@@ -217,7 +225,5 @@
                 <p style="color: #666;">No tasks yet. Add your first task above!</p>
             @endforelse
         </div>
-
     </div>
-</x-slot>
-</x-main-layout>
+@endsection 

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title }}</title>
+    <title>@yield('title', '')</title>
     <x-layout/>
     <style>
-        * {
+                * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -69,16 +69,16 @@
         }
 
         
-    </style>
 
+    </style>
         @stack('styles') 
 
 </head>
 <body>
 <nav>
     <ul class="nav-left">
-        <li><a href="{{ route('welcome') }}">ToDo</a></li>
-        <li><a href="">Profile</a></li>
+        <li><a href="{{ route('welcome') }}">Tasks</a></li>
+        <li><a href="{{ route('profile') }}">Profile</a></li>
     </ul>
 
     <ul class="nav-right">
@@ -91,7 +91,6 @@
     </ul>
 </nav>
 
-{{ $content ?? "" }}
-    
+@yield('content')    
 </body>    
 </html>

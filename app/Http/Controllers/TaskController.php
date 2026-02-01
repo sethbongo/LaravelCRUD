@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Task;
+// use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -37,6 +38,9 @@ class TaskController extends Controller implements HasMiddleware
 
     public function getTasks(){
         $tasks = Task::where('user_id', Session::get('user_id'))->get();
+        // $user = User::find(Session::get('user_id'));
+        // $tasks = $user->tasks();
+        // $tasks = Session::get('user_id')->
         return view('todopage', ['tasks'=>$tasks]);
 
     }
