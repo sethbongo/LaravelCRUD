@@ -1,59 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel To-Do List Application with Native Authentication
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Overview
+This project is a Laravel-based web application developed as a course requirement.  
+It implements a **native authentication system**, **user profile management**, and a **user-specific To-Do List CRUD application**, all built from scratch without relying on Laravel’s default authentication scaffolding.
 
-## About Laravel
+The system follows the **MVC architecture** and uses **session-based authentication** to ensure secure access to protected resources.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Student Information
+- **Name:** Seth Laurence B. Bongo
+- **College:** Central Mindanao University
+- **Program:** BS in Information Technology
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### A. Native Authentication System
+- User registration
+- User login
+- User logout
+- Password hashing using Laravel’s `Hash` facade
+- Session-based authentication
+- Route protection using custom middleware
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### B. User Management and Profile Editing
+- View authenticated user profile
+- Edit user name and email
+- Optional password update
+- Profile page accessible only to logged-in users
 
-## Laravel Sponsors
+### C. To-Do List CRUD Application
+- Create tasks
+- View tasks belonging only to the logged-in user
+- Edit existing tasks
+- Delete tasks
+- User-task relationship enforced using Eloquent ORM
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### D. User Interface Design (Original)
+- Custom layout structure
+- Unique spacing, colors, and typography
+- No default Laravel UI or authentication templates used
+- Designed to be visually distinct from other projects
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Technologies Used
+- **Laravel (PHP Framework)**
+- **Blade Templating Engine**
+- **PostgreSQL**
+- **Git & GitHub**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Project Structure (High-Level)
+- `app/Models` – User and Task models
+- `app/Http/Controllers` – Authentication, Profile, and Task controllers
+- `app/Http/Middleware` – Custom authentication middleware
+- `routes/web.php` – Web routes and protected routes
+- `resources/views` – Blade templates (custom UI)
+- `database/migrations` – Database schema definitions
 
-## Code of Conduct
+## Authentication Flow
+1. User registers with name, email, and password
+2. Password is hashed before storing in the database
+3. On login, credentials are validated and stored in the session
+4. Middleware checks session data to protect routes
+5. User can log out, which clears the session
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
+## Learning Objectives Achieved
 
-## Security Vulnerabilities
+### Technical Objectives
+- Created a Laravel project from scratch
+- Configured database connections
+- Implemented authentication manually
+- Used password hashing and session handling
+- Built user profile management
+- Implemented CRUD operations using Eloquent ORM
+- Protected routes with custom middleware
+- Used Blade templates effectively
+- Designed an original user interface
+- Used Git and GitHub for version control
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Conceptual Objectives
+- Understanding of MVC architecture
+- Understanding Laravel request lifecycle
+- Knowledge of session-based authentication flow
+- Understanding relationships between users and tasks
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
