@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('tasks');
             $table->date('date_to_do');
+            $table->boolean('is_done');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');   
             $table->timestamps();
         });

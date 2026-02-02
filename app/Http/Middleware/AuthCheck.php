@@ -19,6 +19,6 @@ class AuthCheck
         if (!Session::has('user_id')) {
             return redirect('/');
             }           
-            return $next($request);
+        return $next($request);
     }
 }

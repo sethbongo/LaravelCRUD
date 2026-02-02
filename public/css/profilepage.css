@@ -124,3 +124,97 @@
         .delete-btn:hover {
             background-color: #bebaba;
         }
+
+.profile-picture-section {
+    margin-bottom: 2rem;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 2px solid #000000;
+}
+
+.profile-picture-section::before {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+
+
+.profile-picture-section .mb-3 {
+    margin-bottom: 1.5rem !important;
+}
+
+.profile-picture-section .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #000000;
+    font-size: 1rem;
+}
+
+.profile-picture-section .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+
+.profile-picture-section .form-control:hover {
+    background-color: #f8f9fa;
+}
+
+.profile-picture-section input[type="file"]::-webkit-file-upload-button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+
+.profile-picture-section input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #333333;
+}
+
+.profile-picture-section .btn {
+    background-color: white;
+    color: #000000;
+    border: 1.5px solid #000000;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-picture-section .btn:hover {
+    background-color: #bebaba;
+}
+
+.profile-picture-section .btn-primary {
+    background-color: white;
+    border-color: #000000;
+}
+
+.profile-picture-section .btn-primary:hover {
+    background-color: #bebaba;
+    border-color: #000000;
+}

@@ -40,6 +40,13 @@
         <p style="color:red">{{ $message }}</p>
         @enderror    
     </div><br>
+
+        <div id="confirmPassDiv">
+        <label for="password_confirmation">Confirm Password:<input type="password" id="password_confirmation" placeholder="Confirm password" name='password_confirmation'required></label>
+       @error('password_confirmation')
+        <p style="color:red">{{ $message }}</p>
+        @enderror    
+    </div><br>
         
         <div id="btnDiv">
         <button>Submit</button>

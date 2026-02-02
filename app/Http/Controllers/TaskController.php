@@ -28,7 +28,7 @@ class TaskController extends Controller implements HasMiddleware
         'date_to_do' => ['required', 'date', 'after_or_equal:today']
         ]
         );
-
+        $incoming['is_done'] = false;
         $incoming['user_id'] = Session::get('user_id');
 
         Task::create($incoming);
@@ -68,8 +68,20 @@ class TaskController extends Controller implements HasMiddleware
             'tasks'=> ['required'],
             'date_to_do' => ['required', 'date', 'after_or_equal:today']
         ]);
+        $incoming['is_done'] = false;
 
         $task->update($incoming);
+        return redirect()->route('welcome');
+    }
+
+
+    public function doneTask(Request $request, Task $task){
+        if (Session::get('user_id') != $task['user_id']){
+            return redirect()->route('welcome');
+        }
+        
+        $task->update(['is_done' => !$task->is_done]);
+        
         return redirect()->route('welcome');
     }
 

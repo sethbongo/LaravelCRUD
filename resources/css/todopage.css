@@ -119,29 +119,20 @@
             gap: 0.5rem;
         }
 
-        .updatebutton, .deletebutton {
+        .edit-btn, .delete-btn {
             padding: 0.5rem 1.5rem;
             font-size: 0.9rem;
             font-weight: 600;
             border-radius: 5px;
             cursor: pointer;
             border: 1.5px solid #000000;
-        }
-
-        .updatebutton {
             background-color: white;
             color: #000000;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 0.5rem;
         }
 
-        .updatebutton:hover {
-            background-color: #bebaba;
-        }
-
-        .deletebutton {
-            background-color: white;
-            color: #000000;
-        }
-
-        .deletebutton:hover {
+        .edit-btn:hover, .delete-btn:hover {
             background-color: #bebaba;
         }

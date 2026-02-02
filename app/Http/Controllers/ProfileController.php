@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
 
@@ -42,6 +43,22 @@ class ProfileController extends Controller implements HasMiddleware
         return redirect()->route('profile');
 
 
+    }
+
+    public function uploadProfileImage(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+        $user = User::find(Session::get('user_id'));
+        if ($request->hasFile('image')) {
+            if ($user->image_path && Storage::disk('public')->exists($user->image_path)) {
+                Storage::disk('public')->delete($user->image_path);
+            }
+            $path = $request->file(key: 'image')->store('profile_images', 'public');
+            $user->image_path = $path;
+            $user->save();
+        }
+        return redirect()->route('profile');
     }
 
     public function deleteprofile(Request $request){

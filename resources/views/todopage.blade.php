@@ -62,9 +62,16 @@
             <h2>Your Tasks</h2>
             @forelse($tasks ?? [] as $task)
                 <div class="task-item">
-                    <h3>{{ $task->title }}</h3>
-                    <p>{{ $task->tasks }}</p>
-                    <p class="task-date">Due: {{ $task->date_to_do }}</p>
+                    @if ($task->is_done)
+                        <del><h3>{{ $task->title }}</h3></del>
+                        <del><p>{{ $task->tasks }}</p></del>
+                        <del><p class="task-date">Due: {{ $task->date_to_do }}</p></del>
+                    @else
+                        <h3>{{ $task->title }}</h3>
+                        <p>{{ $task->tasks }}</p>
+                        <p class="task-date">Due: {{ $task->date_to_do }}</p>
+                    @endif
+                    
                     <div class="task-actions">
                         <form action="{{ route('editTask', $task->id) }}" method="GET" style="display: inline;">
                             <button type="submit" class="updatebutton">Update</button>
@@ -75,6 +82,18 @@
                             @method('DELETE')
                             <button type="submit" class="deletebutton" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
                         </form>
+
+                        <form action="{{ route('taskdone', $task->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            @if($task->is_done)
+                                <button type="submit" class="deletebutton" disabled>Done Task</button>                                
+                            @else
+                                <button type="submit" class="deletebutton" >Done Task</button>                               
+                            @endif
+                        </form>
+                         {{-- <x-edit-button :route="route('editTask', $task->id)" label="Update" />
+                        <x-delete-button :route="route('deletepost', $task->id)" confirm-message="Are you sure you want to delete this task?" /> --}}
                     </div>
                 </div>
             @empty

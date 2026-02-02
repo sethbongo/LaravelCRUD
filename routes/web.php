@@ -31,6 +31,10 @@ Route::delete('/deletetasks/{task}', [TaskController::class, 'taskdelete'])->nam
 
 Route::get('/profile', [ProfileController::class, 'profileview'])->name('profile');
 
+Route::post('/uploadprofileimage', [ProfileController::class, 'uploadProfileImage'])->name('uploadprofileimage');
+
 Route::put('/editprofile', [ProfileController::class,  'editprofile'])->name('editprofile');
 
 Route::delete('/deleteprofile', [ProfileController::class, 'deleteprofile'])->name('deleteprofile');
+
+Route::put('/donetask/{task}', [TaskController::class, 'doneTask'])->name('taskdone');

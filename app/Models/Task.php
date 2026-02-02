@@ -10,6 +10,7 @@ class Task extends Model
         'title',
         'tasks',
         'date_to_do',
+        'is_done',
         'user_id',
         
     ];
